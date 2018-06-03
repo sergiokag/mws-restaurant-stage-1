@@ -34,6 +34,21 @@ self.addEventListener('activate', function(e) {
   console.log('[Service Worker activated]')
 });
 
-self.addEventListener('fetch', function (event) {
-   console.log('[Service Worker fetch]')
-});
+self.addEventListener('fetch', event => {
+    // Let the browser do its default thing
+    // for non-GET requests.
+    if (event.request.method != 'GET') return;
+
+    event.respondWith(
+        caches.open('restaurants_v1').then(function(cache) {
+            return cache.match(event.request).then(function (response) {
+            return response || fetch(event.request).then(function(response) {
+                cache.put(event.request, response.clone());
+                return response;
+            }).catch(e => console.error(e));
+            });
+        })
+    );
+
+
+  });
