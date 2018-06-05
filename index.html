@@ -54,16 +54,18 @@
 
   <!-- Register SW -->
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
-      .then(function(reg) {
-        // registration worked
-        console.log('Registration succeeded. Scope is ' + reg.scope);
-      }).catch(function(error) {
-        // registration failed
-        console.log('Registration failed with ' + error);
+      window.addEventListener('load', function() {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
+          .then(function(reg) {
+            // registration worked
+            console.log('Registration succeeded. Scope is ' + reg.scope);
+          }).catch(function(error) {
+            // registration failed
+            console.log('Registration failed with ' + error);
+          });
+        }
       });
-    }
   </script>
 
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
