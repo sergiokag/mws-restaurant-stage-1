@@ -19,7 +19,9 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
+    <ul 
+        aria-label="breadcrumb"
+        id="breadcrumb" >
       <li><a href="/">Home</a></li>
     </ul>
     <!-- End breadcrumb -->
@@ -28,9 +30,13 @@
   <!-- End header -->
 
   <!-- Beginning main -->
-  <main id="maincontent">
+  <main
+      role="main" 
+      id="maincontent">
     <!-- Beginning map -->
-    <section id="map-container">
+    <section 
+          role="application"
+          id="map-container">
       <div id="map"></div>
     </section>
     <!-- End map -->
@@ -58,6 +64,20 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
+    <! -- Register SW -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
+        .then(function(reg) {
+          // registration worked
+          console.log('Registration succeeded. Scope is ' + reg.scope);
+        }).catch(function(error) {
+          // registration failed
+          console.log('Registration failed with ' + error);
+        });
+      }
+    </script>
+
   <!-- Database helpers -->
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
